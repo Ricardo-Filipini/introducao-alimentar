@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Guia de Introdução Alimentar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #118AB2;
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 10px;
+            top: 4px;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            border: 3px solid #f8fafc;
+            background-color: #FF6B6B;
+        }
+    </style>
+</head>
+<body class="text-[#073B4C]">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C] mb-2">Guia Visual de Introdução Alimentar</h1>
+            <p class="text-lg text-[#118AB2]">Uma jornada de sabores e descobertas para o seu bebê.</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="quando-comecar" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">O Ponto de Partida: Quando Começar?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <div class="text-8xl font-bold text-[#FF6B6B]">6</div>
+                        <div class="text-4xl font-semibold text-[#118AB2]">Meses</div>
+                        <p class="mt-4 text-gray-600">A OMS e a SBP recomendam o início da alimentação complementar aos 6 meses, junto com o leite materno ou fórmula.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center md:text-left">Sinais de Prontidão do Bebê</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><span class="text-2xl text-[#06D6A0] mr-3">✓</span> <span><strong>Senta com apoio:</strong> Consegue sustentar a cabeça e o tronco, essencial para uma deglutição segura.</span></li>
+                            <li class="flex items-start"><span class="text-2xl text-[#06D6A0] mr-3">✓</span> <span><strong>Leva objetos à boca:</strong> Demonstra coordenação mão-boca, preparando-se para se autoalimentar.</span></li>
+                            <li class="flex items-start"><span class="text-2xl text-[#06D6A0] mr-3">✓</span> <span><strong>Mostra interesse:</strong> Observa os adultos comendo e tenta pegar os alimentos.</span></li>
+                            <li class="flex items-start"><span class="text-2xl text-[#06D6A0] mr-3">✓</span> <span><strong>Perdeu o reflexo de protrusão:</strong> Não empurra mais a comida para fora da boca com a língua.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="o-prato-ideal" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Montando o Prato Perfeito</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center">A Base de Cada Refeição Principal</h3>
+                        <p class="mb-6 text-center text-gray-600">Desde o início, o prato do bebê deve ser variado, contendo um alimento de cada um dos quatro grupos essenciais para garantir uma nutrição completa.</p>
+                        <div class="chart-container">
+                            <canvas id="foodGroupsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-red-50 border-l-4 border-[#FF6B6B] p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-4 text-[#FF6B6B]">⚠️ O que Evitar a Todo Custo</h3>
+                        <p class="mb-4 text-gray-700">Para proteger a saúde e o paladar em formação do bebê, alguns itens são estritamente proibidos.</p>
+                        <ul class="space-y-3">
+                            <li><strong class="text-lg">Açúcar e Doces:</strong> Antes dos 2 anos. Vicia o paladar e aumenta o risco de obesidade.</li>
+                            <li><strong class="text-lg">Mel:</strong> Antes de 1 ano. Risco de botulismo infantil.</li>
+                            <li><strong class="text-lg">Ultraprocessados:</strong> Antes dos 2 anos. Ricos em sódio, gorduras e aditivos.</li>
+                            <li><strong class="text-lg">Sal:</strong> Antes de 1 ano. Sobrecarga os rins imaturos do bebê.</li>
+                            <li><strong class="text-lg">Leite de Vaca (bebida):</strong> Antes de 1 ano. Baixo teor de ferro e excesso de proteínas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="jornada-texturas" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">A Jornada das Texturas e Refeições</h2>
+                <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">A evolução da consistência dos alimentos é crucial para o desenvolvimento da mastigação e da fala. Acompanhe a progressão recomendada.</p>
+                <div class="relative pl-8">
+                    <div class="timeline-item relative pb-10">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-[#118AB2]">6 Meses</h4>
+                        <p><strong>Textura:</strong> Pastosa e espessa (amassada com garfo, nunca liquidificada).</p>
+                        <p><strong>Refeições:</strong> 2 a 3 por dia (ex: 1 fruta + 1 refeição principal).</p>
+                    </div>
+                    <div class="timeline-item relative pb-10">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-[#118AB2]">7-8 Meses</h4>
+                        <p><strong>Textura:</strong> Amassada com alguns pedaços pequenos e macios.</p>
+                        <p><strong>Refeições:</strong> 3 a 4 por dia (ex: 2 frutas + 2 refeições principais).</p>
+                    </div>
+                    <div class="timeline-item relative pb-10">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-[#118AB2]">9-11 Meses</h4>
+                        <p><strong>Textura:</strong> Alimentos picados, desfiados e em pedaços que o bebê possa pegar.</p>
+                        <p><strong>Refeições:</strong> 4 por dia (ex: 2 lanches + 2 refeições principais).</p>
+                    </div>
+                    <div class="timeline-item relative">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-[#118AB2]">12+ Meses</h4>
+                        <p><strong>Textura:</strong> A mesma comida da família, com cortes seguros.</p>
+                        <p><strong>Refeições:</strong> 4 a 5 por dia, integrando-se à rotina familiar.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="seguranca" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#073B4C]">Segurança em Primeiro Lugar</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center">Reflexo de GAG vs. Engasgo Real</h3>
+                        <p class="text-gray-600 mb-6 text-center">Saber a diferença é fundamental para agir corretamente e com calma.</p>
+                        <div class="flex flex-col space-y-4">
+                            <div class="border-2 border-green-300 bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-green-800">Reflexo de GAG (Normal e Seguro)</h4>
+                                <p class="text-green-700">É um mecanismo de proteção. O bebê tosse, faz ânsia, pode cuspir o alimento. Ele consegue fazer barulho. <strong>Não intervenha!</strong></p>
+                            </div>
+                            <div class="text-center font-bold text-2xl text-[#118AB2]">↓</div>
+                            <div class="border-2 border-red-300 bg-red-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-red-800">Engasgo (Emergência)</h4>
+                                <p class="text-red-700">O bebê fica silencioso, com dificuldade para respirar, tosse fraca e pele azulada. <strong>Aja imediatamente!</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-center">Cortes Seguros e Alimentos de Risco</h3>
+                        <p class="text-gray-600 mb-6 text-center">A forma como o alimento é oferecido faz toda a diferença para a segurança.</p>
+                         <div class="bg-yellow-50 border-l-4 border-[#FFD166] p-6 rounded-lg">
+                            <h4 class="font-bold text-lg text-yellow-800 mb-3">Modifique Alimentos de Alto Risco:</h4>
+                            <ul class="list-disc list-inside space-y-2 text-yellow-900">
+                                <li><strong>Uvas e tomates cereja:</strong> Corte em 4 partes no comprimento.</li>
+                                <li><strong>Salsichas e linguiças:</strong> Evite, mas se oferecer, corte em 4 no comprimento.</li>
+                                <li><strong>Oleaginosas (nozes, amendoim):</strong> Ofereça apenas em forma de pasta ou farinha.</li>
+                                <li><strong>Maçã e cenoura cruas:</strong> Ofereça cozidas e amassadas ou raladas finamente.</li>
+                            </ul>
+                            <p class="mt-4 text-sm text-yellow-700"><strong>Evite:</strong> Pipoca, balas duras e alimentos pegajosos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bons-habitos" class="text-center">
+                <h2 class="text-3xl font-bold mb-8 text-[#073B4C]">Cultivando uma Relação Saudável com a Comida</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-5xl mb-4">🧘</div>
+                        <h3 class="text-2xl font-semibold mb-2 text-[#118AB2]">Paciência e Persistência</h3>
+                        <p class="text-gray-600">Pode ser necessário oferecer um novo alimento de 10 a 15 vezes. Não desista na primeira recusa e nunca force.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-5xl mb-4">👶</div>
+                        <h3 class="text-2xl font-semibold mb-2 text-[#06D6A0]">Confie no Bebê</h3>
+                        <p class="text-gray-600">Pratique a alimentação responsiva. Você oferece, mas o bebê decide o quanto comer. Respeite os sinais de fome e saciedade.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-5xl mb-4">🍽️</div>
+                        <h3 class="text-2xl font-semibold mb-2 text-[#FFD166]">Ambiente Positivo</h3>
+                        <p class="text-gray-600">Faça das refeições um momento feliz e sem distrações (telas desligadas). A bagunça faz parte do aprendizado!</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 border-t pt-8">
+            <p class="text-gray-500">Este infográfico é um guia informativo e não substitui a consulta com um pediatra ou nutricionista. Cada bebê é único.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const wrapLabel = (label) => {
+                if (label.length <= 16) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > 16) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const ctx = document.getElementById('foodGroupsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Cereais e Tubérculos (Energia)', 
+                        'Leguminosas (Proteína Vegetal)', 
+                        'Legumes e Verduras (Vitaminas)', 
+                        'Proteína Animal (Ferro)'
+                    ].map(wrapLabel),
+                    datasets: [{
+                        label: 'Grupos Alimentares',
+                        data: [25, 25, 25, 25],
+                        backgroundColor: [
+                            '#FFD166',
+                            '#06D6A0',
+                            '#118AB2',
+                            '#FF6B6B'
+                        ],
+                        borderColor: '#f8fafc',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#073B4C',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
